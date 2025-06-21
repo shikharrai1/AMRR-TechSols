@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Items</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .card-img-top {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-bottom: 1px solid #ccc;
+    }
+    .additional-img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+    }
+    .card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card-body {
+      flex-grow: 1;
+    }
+    .card-footer {
+      background-color: #f8f9fa;
+    }
+  </style>
+</head>
+<body class="container py-4">
+
+  <h1 class="mb-4">Available Items</h1>
+
+  <div class="row g-4">
+    <% items.forEach(item => { %>
+      <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm h-100">
+          
+          <!-- Cover Image -->
+          <img src="<%= item.coverImage %>" class="card-img-top" alt="Cover image of <%= item.name %>">
+          
+          <div class="card-body">
+            <h5 class="card-title"><%= item.name %></h5>
+            <p class="card-text"><strong>Type:</strong> <%= item.type %></p>
+            <p class="card-text"><%= item.description %></p>
+          </div>
+
+          <!-- Additional Images -->
+          <% if (item.additionalImages.length > 0) { %>
+            <div class="card-footer">
+              <h6>More Images:</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <% item.additionalImages.forEach(img => { %>
+                  <img src="<%= img %>" class="rounded border additional-img" alt="Additional image">
+                <% }) %>
+              </div>
+            </div>
+          <% } %>
+
+        </div>
+      </div>
+    <% }); %>
+  </div>
+
+</body>
+</html>
